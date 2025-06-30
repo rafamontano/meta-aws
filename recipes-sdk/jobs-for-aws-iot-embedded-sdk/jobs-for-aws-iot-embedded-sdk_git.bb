@@ -1,32 +1,36 @@
-# Recipe created by recipetool
-# This is the basis of a recipe and may need further editing in order to be fully functional.
-# (Feel free to remove these comments when editing.)
-
-# WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
-# your responsibility to verify that the values are complete and correct.
+SUMMARY = "Client library for using AWS IoT Jobs service on embedded devices"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c8c19afab7f99fb196c9287cbd60a258"
 
-SRC_URI = "gitsm://github.com/aws/Jobs-for-AWS-IoT-embedded-sdk.git;protocol=https;branch=main"
+SRC_URI = "\
+	gitsm://github.com/aws/Jobs-for-AWS-IoT-embedded-sdk.git;protocol=https;branch=main \
+    file://CMakeLists.txt \
+    file://Findjobs.cmake \
+    file://001-fix-json-include.patch \
+	"
 
 # Modify these as desired
 PV = "1.0+git"
 SRCREV = "0a89d30baa011d305029c5c06abe3658972336ef"
 
-# NOTE: no Makefile found, unable to determine what needs to be done
+DEPENDS = "corejson"
 
-do_configure () {
-	# Specify any needed configure commands here
-	:
+inherit cmake
+
+S = "${WORKDIR}/git"
+
+do_configure:prepend () {
+    cp ${WORKDIR}/CMakeLists.txt ${S}
 }
 
-do_compile () {
-	# Specify compilation commands here
-	:
+do_install:append() {
+    install -d ${D}${datadir}/cmake/Modules
+    install -m 0644 ${WORKDIR}/Findjobs.cmake ${D}${datadir}/cmake/Modules/
 }
 
-do_install () {
-	# Specify install commands here
-	:
-}
-
+FILES:${PN} += "${libdir}/libjobs.so.*"
+FILES:${PN}-dev += "\
+    ${libdir}/libjobs.so \
+    ${includedir}/libjobs/* \
+    ${datadir}/cmake/Modules/Findjobs.cmake \
+"

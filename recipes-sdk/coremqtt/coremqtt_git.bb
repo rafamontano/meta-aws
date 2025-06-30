@@ -6,8 +6,6 @@ SRC_URI = "gitsm://github.com/FreeRTOS/coreMQTT.git;protocol=https;branch=main \
     file://Findcore_mqtt.cmake \
 "
 
-DEPENDS = "cmake-native ruby-native"
-
 SRCREV = "d7b04a13002496994d737eebaf56dbe1e56aaefb"
 
 inherit cmake
