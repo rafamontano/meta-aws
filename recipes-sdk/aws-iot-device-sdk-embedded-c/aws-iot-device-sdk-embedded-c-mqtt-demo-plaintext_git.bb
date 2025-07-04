@@ -2,7 +2,7 @@ SUMMARY = "AWS IoT Device SDK for Embedded C - demo mqtt-demo-plaintext"
 DESCRIPTION = "SDK for connecting to AWS IoT from a device using embedded C - demo mqtt-demo-plaintext build from discrete lib packages instead of self contained libs"
 HOMEPAGE = "https://github.com/aws/aws-iot-device-sdk-embedded-C"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${UNPACKDIR}/${PN}-${PV}/LICENSE;md5=c8c19afab7f99fb196c9287cbd60a258 "
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c8c19afab7f99fb196c9287cbd60a258 "
 
 SRC_URI = "\
     git://github.com/aws/aws-iot-device-sdk-embedded-C.git;protocol=https;branch=main \
@@ -24,10 +24,10 @@ RDEPENDS:${PN}-ptest += "\
 
 inherit cmake ptest
 
-S = "${UNPACKDIR}/${PN}-${PV}/demos/mqtt/mqtt_demo_plaintext"
+S = "${WORKDIR}/git"
 
 do_configure:prepend () {
-    cp ${UNPACKDIR}/CMakeLists.txt ${S}/
+    cp ${WORKDIR}/CMakeLists.txt ${S}
 }
 
 do_install () {

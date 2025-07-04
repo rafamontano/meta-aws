@@ -12,13 +12,15 @@ DEPENDS = "cmake-native ruby-native"
 
 inherit cmake
 
-do_configure:prepend() {
-    cp ${UNPACKDIR}/CMakeLists.txt ${S}/
+S = "${WORKDIR}/git"
+
+do_configure:prepend () {
+    cp ${WORKDIR}/CMakeLists.txt ${S}
 }
 
 do_install:append() {
     install -d ${D}${datadir}/cmake/Modules
-    install -m 0644 ${UNPACKDIR}/Findbackoffalgorithm.cmake ${D}${datadir}/cmake/Modules/
+    install -m 0644 ${WORKDIR}/Findbackoffalgorithm.cmake ${D}${datadir}/cmake/Modules/
 }
 
 FILES:${PN} += "${libdir}/libbackoffalgorithm.so.*"

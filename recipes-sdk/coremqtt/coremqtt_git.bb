@@ -12,13 +12,15 @@ SRCREV = "d7b04a13002496994d737eebaf56dbe1e56aaefb"
 
 inherit cmake
 
-do_configure:prepend() {
-    cp ${UNPACKDIR}/CMakeLists.txt ${S}/
+S = "${WORKDIR}/git"
+
+do_configure:prepend () {
+    cp ${WORKDIR}/CMakeLists.txt ${S}
 }
 
 do_install:append() {
     install -d ${D}${datadir}/cmake/Modules
-    install -m 0644 ${UNPACKDIR}/Findcore_mqtt.cmake ${D}${datadir}/cmake/Modules/
+    install -m 0644 ${WORKDIR}/Findcore_mqtt.cmake ${D}${datadir}/cmake/Modules/
     install ${S}/source/interface/transport_interface.h ${D}${includedir}/core_mqtt/
 }
 

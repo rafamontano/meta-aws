@@ -5,21 +5,21 @@ project(mqtt_demo_plaintext C)
 find_package(core_mqtt REQUIRED)
 find_package(backoffalgorithm REQUIRED)
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../../logging-stack/logging.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/demos/logging-stack/logging.cmake)
 
 # Add source files
 add_executable(mqtt_demo_plaintext
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../platform/posix/clock_posix.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../platform/posix/transport/src/plaintext_posix.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../platform/posix/transport/src/sockets_posix.c
-    mqtt_demo_plaintext.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/platform/posix/clock_posix.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/platform/posix/transport/src/plaintext_posix.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/platform/posix/transport/src/sockets_posix.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/demos/mqtt/mqtt_demo_plaintext/mqtt_demo_plaintext.c
 )
 
 # Add include directories for platform specific files
 target_include_directories(mqtt_demo_plaintext PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../platform/posix/transport/include/
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../platform/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/platform/posix/transport/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/platform/include/
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
         ${LOGGING_INCLUDE_DIRS}
