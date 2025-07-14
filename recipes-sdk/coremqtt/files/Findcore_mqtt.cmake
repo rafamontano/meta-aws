@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Findcore_mqtt.cmake
-=======
->>>>>>> a2722f5b (Adding aws-iot-device-sdk-embedded-c-mqtt-demo-plaintext, backoffalgorithm, coremqtt, corehttp, sigv4)
 find_path(CORE_MQTT_INCLUDE_DIR core_mqtt.h
           PATHS ${CMAKE_INSTALL_PREFIX}/include
           PATH_SUFFIXES core_mqtt)
@@ -21,8 +17,4 @@ if(core_mqtt_FOUND AND NOT TARGET core_mqtt::core_mqtt)
   set_target_properties(core_mqtt::core_mqtt PROPERTIES
     IMPORTED_LOCATION "${CORE_MQTT_LIBRARY}"
     INTERFACE_INCLUDE_DIRECTORIES "${CORE_MQTT_INCLUDE_DIR}")
-<<<<<<< HEAD
 endif()
-=======
-endif()
->>>>>>> a2722f5b (Adding aws-iot-device-sdk-embedded-c-mqtt-demo-plaintext, backoffalgorithm, coremqtt, corehttp, sigv4)
